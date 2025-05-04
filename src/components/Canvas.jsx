@@ -3,9 +3,11 @@ import DraggableElement from "./DraggableElement";
 
 function Canvas({ elements, handleDragStop }) {
   return (
+    <>
+    <h1 className="text-center mb font-bold text-5xl m-20">Drive into your Memories</h1>
     <div
       id="canvas"
-      className="mt-5 mx-auto w-[93%] max-w-7xl h-[80vh] md:h-[85vh] lg:h-[90vh] border-2  border-gray-500 relative bg-#fbf5f1"
+      className="mx-auto w-[93%] max-w-7xl h-[80vh] md:h-[85vh] lg:h-[50vh] border-2  border-gray-500 relative bg-#fbf5f1 mb-50 mt-40"
     >
       {elements.map((element, index) => (
         <DraggableElement
@@ -16,6 +18,7 @@ function Canvas({ elements, handleDragStop }) {
         />
       ))}
     </div>
+    </>
   );
 }
 

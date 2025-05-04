@@ -66,6 +66,7 @@ function App() {
 
   return (
     <>
+    <ExportPdf/>
       <SaveAnimation />
 
       <Toolbar
@@ -75,7 +76,7 @@ function App() {
         handleImageUpload={handleImageUpload}
       />
       <Canvas elements={elements} handleDragStop={handleDragStop} />
-      <ExportPdf/>
+      
 
       
       

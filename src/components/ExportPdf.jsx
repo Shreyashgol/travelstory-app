@@ -18,11 +18,24 @@ const ExportPdf = () => {
       format: [500,980],
     });
 
-    pdf.addImage(imgData, "PNG", 0, 0, canvasImage.width, canvasImage.height);
-    pdf.save("TravelStory_Journal.pdf");
+    const canvasWidth = canvas.width;
+    const canvasHeight = canvas.height;
+
+    const scaleX = pdfWidth / canvasWidth;
+    const scaleY = pdfHeight / canvasHeight;
+
+    const scale = Math.min(scaleX, scaleY);
+
+    const imgWidth = canvasWidth * scale;
+    const imgHeight = canvasHeight * scale;
+
+    pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
+
+    pdf.save("canvas-content.pdf");
+    
   };
   return (
-    <button onClick={exportToPDF} class="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300">
+    <button onClick={exportToPDF} className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300">
   Export as PDF
 </button>
   )

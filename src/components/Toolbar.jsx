@@ -8,41 +8,6 @@ const Toolbar = ({textInput, setTextInput, handleAddText, handleImageUpload, ele
   const [toolbarPosition, setToolbarPosition] = useState({ x: 0, y: 0 });
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
 
-  const handleMouseDown = (e) => {
-    setIsDragging(true);
-    setDragStart({
-      x: e.clientX - toolbarPosition.x,
-      y: e.clientY - toolbarPosition.y,
-    });
-  };
-
-  const handleMouseMove = (e) => {
-    if (isDragging) {
-      const newX = e.clientX - dragStart.x;
-      const newY = e.clientY - dragStart.y;
-      setToolbarPosition({ x: newX, y: newY });
-    }
-  };
-
-  const handleMouseUp = () => setIsDragging(false);
-
-  const exportToPDF = async () => {
-    const canvasElement = document.getElementById('journal-canvas');
-    if (!canvasElement) return;
-  
-    const canvasImage = await html2canvas(canvasElement);
-    const imgData = canvasImage.toDataURL('image/png');
-  
-    const pdf = new jsPDF({
-      orientation: 'landscape',
-      unit: 'px',
-      format: [canvasImage.width, canvasImage.height],
-    });
-  
-    pdf.addImage(imgData, 'PNG', 0, 0, canvasImage.width, canvasImage.height);
-    pdf.save('TravelStory_Journal.pdf');
-  };
-  
 
   return (
     <div
@@ -52,10 +17,7 @@ const Toolbar = ({textInput, setTextInput, handleAddText, handleImageUpload, ele
       style={{
         transform: `translate(${toolbarPosition.x}px, ${toolbarPosition.y}px)`,
       }}
-      onMouseDown={handleMouseDown}
-      onMouseMove={handleMouseMove}
-      onMouseUp={handleMouseUp}
-      onMouseLeave={handleMouseUp}
+      
     >
       
       <textarea
