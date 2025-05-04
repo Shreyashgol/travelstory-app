@@ -5,7 +5,7 @@ function Canvas({ elements, handleDragStop }) {
   return (
     <div
       id="canvas"
-      className="mt-5 mx-auto w-[93%] max-w-7xl h-[80vh] md:h-[85vh] lg:h-[90vh] border-2 border-dashed border-gray-500 relative bg-#fbf5f1"
+      className="mt-5 mx-auto w-[93%] max-w-7xl h-[80vh] md:h-[85vh] lg:h-[90vh] border-2  border-gray-500 relative bg-#fbf5f1"
     >
       {elements.map((element, index) => (
         <DraggableElement

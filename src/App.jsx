@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
-import Toolbar from './components/Toolbar';
-import Canvas from './components/Canvas';
-import SaveAnimation from './components/SaveAnimation';
+import React, { useState } from "react";
+import Toolbar from "./components/Toolbar";
+import Canvas from "./components/Canvas";
+import SaveAnimation from "./components/SaveAnimation";
+import ExportPdf from "./components/ExportPdf";
 
 
 function App() {
   const [elements, setElements] = useState([]);
-  const [textInput, setTextInput] = useState('');
+  const [textInput, setTextInput] = useState("");
 
   const getRandomPosition = () => {
     const x = Math.floor(Math.random() * 500);
@@ -19,9 +20,14 @@ function App() {
     const position = getRandomPosition();
     setElements([
       ...elements,
-      { type: 'text', content: textInput, position, nodeRef: React.createRef() },
+      {
+        type: "text",
+        content: textInput,
+        position,
+        nodeRef: React.createRef(),
+      },
     ]);
-    setTextInput('');
+    setTextInput("");
   };
 
   const handleImageUpload = (e) => {
@@ -32,7 +38,12 @@ function App() {
       const position = getRandomPosition();
       setElements([
         ...elements,
-        { type: 'image', url: reader.result, position, nodeRef: React.createRef() },
+        {
+          type: "image",
+          url: reader.result,
+          position,
+          nodeRef: React.createRef(),
+        },
       ]);
     };
     reader.readAsDataURL(file);
@@ -51,10 +62,11 @@ function App() {
     );
   };
 
+  
 
   return (
     <>
-    <SaveAnimation />
+      <SaveAnimation />
 
       <Toolbar
         textInput={textInput}
@@ -63,6 +75,9 @@ function App() {
         handleImageUpload={handleImageUpload}
       />
       <Canvas elements={elements} handleDragStop={handleDragStop} />
+      <ExportPdf/>
+
+      
       
     </>
   );

@@ -1,15 +1,9 @@
 import React, { useState } from "react";
-import { FaPlus, FaImage, FaFont, FaFilePdf } from "react-icons/fa";
+import { FaPlus, FaImage,  FaFilePdf } from "react-icons/fa";
 import { jsPDF } from "jspdf";
 import html2canvas from "html2canvas";
 
-function Toolbar({
-  textInput,
-  setTextInput,
-  handleAddText,
-  handleImageUpload,
-  elements,
-}) {
+const Toolbar = ({textInput, setTextInput, handleAddText, handleImageUpload, elements,}) => {
   const [isDragging, setIsDragging] = useState(false);
   const [toolbarPosition, setToolbarPosition] = useState({ x: 0, y: 0 });
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
@@ -32,29 +26,23 @@ function Toolbar({
 
   const handleMouseUp = () => setIsDragging(false);
 
-  const exportToPDF = () => {
-    const canvasElement = document.getElementById("canvas");
-
-    html2canvas(canvasElement).then((canvas) => {
-      const imgData = canvas.toDataURL("image/png");
-
-      const pdfWidth = 595;
-      const pdfHeight = 842;
-
-      const pdf = new jsPDF({ unit: "px", format: [pdfWidth, pdfHeight] });
-
-      const scale = Math.min(
-        pdfWidth / canvas.width,
-        pdfHeight / canvas.height
-      );
-
-      const imgWidth = canvas.width * scale;
-      const imgHeight = canvas.height * scale;
-
-      pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
-      pdf.save("canvas-content.pdf");
+  const exportToPDF = async () => {
+    const canvasElement = document.getElementById('journal-canvas');
+    if (!canvasElement) return;
+  
+    const canvasImage = await html2canvas(canvasElement);
+    const imgData = canvasImage.toDataURL('image/png');
+  
+    const pdf = new jsPDF({
+      orientation: 'landscape',
+      unit: 'px',
+      format: [canvasImage.width, canvasImage.height],
     });
+  
+    pdf.addImage(imgData, 'PNG', 0, 0, canvasImage.width, canvasImage.height);
+    pdf.save('TravelStory_Journal.pdf');
   };
+  
 
   return (
     <div
@@ -69,14 +57,13 @@ function Toolbar({
       onMouseUp={handleMouseUp}
       onMouseLeave={handleMouseUp}
     >
-      <FaFont className="text-white" title="Enter Text" />
-
+      
       <textarea
         placeholder="Enter text"
         value={textInput}
         onChange={(e) => setTextInput(e.target.value)}
         rows={2}
-        className="bg-black text-white border border-zinc-600 rounded-md p-2 resize-none w-full md:w-48 focus:outline-none h-full"
+        className="bg-white text-black border border-zinc-600 rounded-md p-2 resize-none w-full md:w-48 focus:outline-none h-full"
       />
 
       <button
@@ -103,13 +90,7 @@ function Toolbar({
         className="hidden"
       />
 
-      <button
-        onClick={exportToPDF}
-        className="bg-red-600 hover:bg-red-700 p-2 rounded-full text-white"
-        title="Export to PDF"
-      >
-        <FaFilePdf />
-      </button>
+    
     </div>
   );
 }
