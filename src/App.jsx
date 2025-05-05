@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Toolbar from "./components/Toolbar";
 import Canvas from "./components/Canvas";
 import SaveAnimation from "./components/SaveAnimation";
-import ExportPdf from "./components/ExportPdf";
+import { GenerateVideoButton } from "./components/GenerateVideoButton";
 
 
 function App() {
@@ -66,7 +66,7 @@ function App() {
 
   return (
     <>
-    <ExportPdf/>
+   
       <SaveAnimation />
 
       <Toolbar
@@ -76,6 +76,7 @@ function App() {
         handleImageUpload={handleImageUpload}
       />
       <Canvas elements={elements} handleDragStop={handleDragStop} />
+      <GenerateVideoButton canvasElements={elements} />
       
 
       

@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { FaPlus, FaImage,  FaFilePdf } from "react-icons/fa";
-import { jsPDF } from "jspdf";
-import html2canvas from "html2canvas";
 
 const Toolbar = ({textInput, setTextInput, handleAddText, handleImageUpload, elements,}) => {
   const [isDragging, setIsDragging] = useState(false);
@@ -10,15 +8,7 @@ const Toolbar = ({textInput, setTextInput, handleAddText, handleImageUpload, ele
 
 
   return (
-    <div
-      className={`fixed bottom-5 right-5 bg-zinc-900 rounded-xl p-4 shadow-xl flex flex-wrap md:flex-nowrap items-center gap-3 z-[9999] cursor-grab ${
-        isDragging ? "cursor-grabbing" : ""
-      }`}
-      style={{
-        transform: `translate(${toolbarPosition.x}px, ${toolbarPosition.y}px)`,
-      }}
-      
-    >
+    <div className="flex gap-3 m-3">
       
       <textarea
         placeholder="Enter text"
