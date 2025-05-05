@@ -40,7 +40,7 @@ function Canvas({ elements, handleDragStop }) {
 
   return (
     <>
-    <h1 className="text-center mb font-bold text-5xl m-20 text-blue-500 bg-white">Drive into your Memories</h1>
+    <h1 className="text-center mb font-bold text-5xl m-20 text-blue-500 bg-pink">Drive into your Memories</h1>
     <div
       id="canvas"
       className="mx-auto w-[93%] max-w-7xl h-[80vh] md:h-[85vh] lg:h-[50vh] border-2  border-gray-500 relative bg-#fbf5f1 mb-50 mt-4"
@@ -54,16 +54,14 @@ function Canvas({ elements, handleDragStop }) {
         />
       ))}
     </div>
-    <div className="flex justify-center mt-4">
+    <div className="flex justify-center mt-4 gap-3">
       <button
         onClick={exportToPDF}
         className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300"
       >
         Export as PDF
       </button>
-      <button className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300">
-        Generate a Video
-      </button>
+    
     </div>
     </>
   );
